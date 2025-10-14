@@ -1,21 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Produto } from './produto';
+import { Usuario } from './usuario';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutoService {
-  private proxId = 6;
+  private proxId = 7;
+
+  
+    private usuarioLogado: Usuario = { 
+    id: 1,
+    nomeCompleto: 'Lucas da Silva',
+    cpf: '123.456.789-00',
+    dataNascimento: '2000-01-01',
+    email: 'lucas@email.com',
+    senha: '123456'
+  };
+
+
   listaProdutos: Produto[] = [
     { id: 1, usuarioId: 1, titulo: 'Bicicleta Aro 29', categoria: 'Esportes', condicao: 'Usado', descricao: 'Bicicleta em bom estado, ideal para trilhas.', preco: 1200, fotos: ['https://example.com/bike1.jpg'], formasPagamento: ['Dinheiro', 'Cartão'], aceitaTroca: false, cidade: 'São Paulo', opcoesEntrega: ['Retirar no local'], contato: '(11) 91234-5678', observacoes: 'Negociável', dataPublicacao: new Date('2024-01-15') },
     { id: 2, usuarioId: 2, titulo: 'Smartphone XYZ', categoria: 'Eletrônicos', condicao: 'Novo', descricao: 'Smartphone com câmera de alta resolução e bateria duradoura.', preco: 2500, fotos: ['https://example.com/phone1.jpg'], formasPagamento: ['Dinheiro', 'Cartão', 'Pix'], aceitaTroca: true, cidade: 'Rio de Janeiro', opcoesEntrega: ['Correios', 'Retirar no local'], contato: '(21) 99876-5432', observacoes: '', dataPublicacao: new Date('2024-02-20') },
     { id: 3, usuarioId: 3, titulo: 'Livro "Aprendendo Angular"', categoria: 'Livros', condicao: 'Usado', descricao: 'Livro didático sobre desenvolvimento web com Angular.', preco: 80, fotos: ['https://example.com/book1.jpg'], formasPagamento: ['Dinheiro'], aceitaTroca: false, cidade: 'Belo Horizonte', opcoesEntrega: ['Correios'], contato: '(31) 98765-4321', observacoes: 'Capa levemente desgastada', dataPublicacao: new Date('2024-03-10') },
+    { id: 4, usuarioId: 1, titulo: 'Tênis Esportivo', categoria: 'Calçados', condicao: 'Novo', descricao: 'Tênis confortável para corrida e academia.', preco: 350, fotos: ['https://example.com/tenis1.jpg'], formasPagamento: ['Dinheiro', 'Cartão', 'Pix'], aceitaTroca: false, cidade: 'São Paulo', opcoesEntrega: ['Retirar no local', 'Correios'], contato: '(11) 91234-5678', observacoes: '', dataPublicacao: new Date('2024-04-01') },
+    { id: 5, usuarioId: 1, titulo: 'Camiseta Casual', categoria: 'Roupas', condicao: 'Usado', descricao: 'Camiseta em ótimo estado, tamanho M.', preco: 45, fotos: ['https://example.com/camiseta1.jpg'], formasPagamento: ['Dinheiro', 'Cartão'], aceitaTroca: true, cidade: 'São Paulo', opcoesEntrega: ['Retirar no local'], contato: '(11) 91234-5678', observacoes: 'Levemente desbotada', dataPublicacao: new Date('2024-04-05') },
+    { id: 6, usuarioId: 1, titulo: 'Mesa de Escritório', categoria: 'Móveis', condicao: 'Usado', descricao: 'Mesa em madeira com gavetas, perfeita para home office.', preco: 280, fotos: ['https://example.com/mesa1.jpg'], formasPagamento: ['Dinheiro'], aceitaTroca: false, cidade: 'São Paulo', opcoesEntrega: ['Retirar no local'], contato: '(11) 91234-5678', observacoes: '', dataPublicacao: new Date('2024-04-10') }
   ];
-
  
   inserir(produto: any){
     produto.id = this.proxId++;
+    produto.usuarioId = this.usuarioLogado.id; 
     this.listaProdutos.push(produto);
   }  
 
@@ -49,4 +65,8 @@ export class ProdutoService {
       produto => produto.id == id
     );
   }
+
+  listarProdutosDoUsuario(): Produto[] {
+  return this.listaProdutos.filter(produto => produto.usuarioId === this.usuarioLogado.id);
+}
 }
