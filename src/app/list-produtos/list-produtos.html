@@ -1,0 +1,11 @@
+<div class="container">
+    <h2 class="mt-5">Produtos Online</h2>
+
+    <div class="row">
+    @for(prod of listaProdutos; track prod.id) {
+        <div  class="col-12 mb-3">
+            <app-card-produto class="p-3" [produto]="prod"></app-card-produto>
+        </div>
+    }
+
+</div>
