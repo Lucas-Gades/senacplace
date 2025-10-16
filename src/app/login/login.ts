@@ -21,7 +21,7 @@ export class Login {
       if(logado) {
         alert("Usuario logado com sucesso");        
         this.erro.set(false);
-        this.router.navigate(['/tabela']);
+        this.router.navigate(['/inicio']);
       }
       else {
         this.erro.set(true);

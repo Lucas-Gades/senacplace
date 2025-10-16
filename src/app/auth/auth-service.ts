@@ -16,6 +16,7 @@ export class AuthService {
     const user = this.usuarios.find(u => u.usuario === username && u.senha === senha);
     if (user) {
       sessionStorage.setItem('token', user.token);
+      sessionStorage.setItem('usuario', user.usuario);
       return of(true);
     } else {
       return of(false);
@@ -26,8 +27,13 @@ export class AuthService {
     const token = sessionStorage.getItem('token');
     return token !== undefined && token !== null;
   }
+    ehAdmin(): boolean { 
+    const usuario = sessionStorage.getItem('usuario');
+    return usuario === 'admin';
+  }
 
   logout(): void {
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('usuario');
   }
 }
