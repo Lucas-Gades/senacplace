@@ -25,7 +25,7 @@
           @for(prod of meusProdutos | filtroPesquisa:nomePesquisa; track prod.id) {
           <tr>
             <td>{{prod.titulo}}</td>
-            <td class="d-none d-md-table-cell">R$ {{prod.preco | moedaBr}} </td>
+            <td class="d-none d-md-table-cell"> {{prod.preco | moedaBr}} </td>
             <td class="d-none d-md-table-cell">{{prod.categoria}}</td>
             <td>
               <div class="d-flex flex-wrap justify-content-end gap-2">
