@@ -1,20 +1,22 @@
+<!-- Navbar -->
 <nav class="navbar menu navbar-expand-lg navbar-dark bg-primary shadow-sm">
   <div class="container">
     <a class="navbar-brand fw-bold" routerLink="/feed">SenacPlace</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/">Início</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/vender">Vender</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/meus-produtos">Meus Produtos</a>
-        </li>
+        <li class="nav-item"><a class="nav-link" routerLink="/">Início</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/vender">Vender</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/meus-produtos">Meus Produtos</a></li>
       </ul>
       <ul class="navbar-nav ms-auto logo">
         <li class="nav-item">
@@ -25,4 +27,57 @@
   </div>
 </nav>
 
-<router-outlet />
+<!-- Conteúdo principal -->
+<main class="flex-grow-1">
+  <router-outlet></router-outlet>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-light mt-auto py-4 border-top border-success">
+  <div class="container">
+    <div class="row gy-3 align-items-center">
+      <!-- Logo -->
+      <div class="col-12 col-md-4 text-center text-md-start">
+        <h5 class="fw-bold text-success mb-0">
+          <i class="bi bi-shop me-1"></i> SenacPlace
+        </h5>
+        <small class="text-muted">O seu marketplace de oportunidades!</small>
+      </div>
+
+      <!-- Links -->
+      <div class="col-12 col-md-4 text-center">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item mx-2">
+            <a routerLink="/" class="text-light text-decoration-none small">Início</a>
+          </li>
+          <li class="list-inline-item mx-2">
+            <a routerLink="/vender" class="text-light text-decoration-none small">Vender</a>
+          </li>
+          <li class="list-inline-item mx-2">
+            <a routerLink="/meus-produtos" class="text-light text-decoration-none small">Meus Produtos</a>
+          </li>
+          <li class="list-inline-item mx-2">
+            <a routerLink="/sobre" class="text-light text-decoration-none small">Sobre</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Redes sociais -->
+      <div class="col-12 col-md-4 text-center text-md-end text-white">
+        <a href="#" class="text-light mx-1"><i class="bi bi-facebook fs-5"></i></a>
+        <a href="#" class="text-light mx-1"><i class="bi bi-instagram fs-5"></i></a>
+        <a href="#" class="text-light mx-1"><i class="bi bi-whatsapp fs-5"></i></a>
+      </div>
+    </div>
+
+    <hr class="border-secondary my-3" />
+
+    <div class="text-center">
+      <small class="text-white">© 2025 SenacPlace — Desenvolvido com 💻 e ☕</small>
+    </div>
+  </div>
+</footer>
+
+
+
+

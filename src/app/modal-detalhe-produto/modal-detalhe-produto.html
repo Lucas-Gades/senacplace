@@ -5,6 +5,7 @@
         <h5 class="modal-title">{{ produto?.titulo }}</h5>
         <button type="button" class="btn-close" (click)="fechar()"></button>
       </div>
+
       <div class="modal-body">
         <img src="/imagem.png" alt="Foto do produto" class="img-fluid mb-3 rounded border" style="max-height: 200px; object-fit: cover;">
         <p><strong>Categoria:</strong> {{ produto?.categoria}}</p>
@@ -13,13 +14,22 @@
         <p><strong>Preço:</strong> R$ {{ produto?.preco }}</p>
         <p><strong>Cidade:</strong> {{ produto?.cidade }}</p>
         <p><strong>Data de publicação:</strong> {{ produto?.dataPublicacao | date:'dd/MM/yyyy' }}</p>
-        <p><strong>Contato:</strong><a>{{ produto?.contato | telefone}}</a> </p>
+        <p><strong>Contato:</strong><a>{{ produto?.contato | telefone}}</a></p>
         <hr>
         <p><strong>Opções de entrega:</strong> {{ produto?.opcoesEntrega }}</p>
         <p><strong>Aceita troca:</strong> {{ produto?.aceitaTroca ? 'Sim' : 'Não' }}</p>
         <p><strong>Formas de pagamento:</strong> {{ produto?.formasPagamento }}</p>
       </div>
-      <div class="modal-footer">
+
+      <div class="modal-footer d-flex justify-content-between">
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-primary">
+            <i class="bi bi-envelope-fill me-1"></i> Email
+          </button>
+          <button type="button" class="btn btn-success" >
+            <i class="bi bi-whatsapp me-1"></i> WhatsApp
+          </button>
+        </div>
         <button type="button" class="btn btn-secondary" (click)="fechar()">Fechar</button>
       </div>
     </div>

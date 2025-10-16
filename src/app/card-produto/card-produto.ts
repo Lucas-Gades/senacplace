@@ -15,17 +15,5 @@ import { CategoriaCorPipe } from '../categoria-cor-pipe';
 export class CardProduto {
   @Input() produto: Produto = { id: 1, titulo: 'Produto 1', preco: 100 };
 
-
-  categoriaCores: { [key: string]: string } = {
-    'Esportes': 'bg-success',
-    'Eletrônicos': 'bg-primary',
-    'Livros': 'bg-warning',
-    'Calçados': 'bg-info',
-    'Roupas': 'bg-secondary',
-    'Móveis': 'bg-dark'
-  };
-
-  getCategoriaCor(categoria?: string): string {
-    return categoria ? this.categoriaCores[categoria] || 'bg-primary' : 'bg-primary';
-  }
+  
 }

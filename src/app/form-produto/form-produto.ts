@@ -15,7 +15,7 @@ export class FormProdutos {
   id?: number;
   
   produto = new Produto();
-  botaoAcao = "Cadastrar"
+  botaoAcao = "Publicar"
 
   produtoService = inject(ProdutoService);
   route = inject(ActivatedRoute);
@@ -26,6 +26,7 @@ export class FormProdutos {
     if(this.id) {
       this.botaoAcao = "Editar";
       this.produto = this.produtoService.buscarPorId(this.id) || new Produto();
+
     }
   }
 
