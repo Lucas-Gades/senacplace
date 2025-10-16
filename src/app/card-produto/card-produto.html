@@ -1,7 +1,5 @@
 <div class="card shadow-sm border-0 mb-3 rounded-3">
   <div class="row g-0 align-items-center p-3">
-
-    <!-- Imagem -->
     <div class="col-12 col-md-2 text-center mb-3 mb-md-0">
       <img
       src="/imagem.png"
@@ -10,14 +8,12 @@
         style="max-width: 90px; height: 90px; object-fit: cover;"
       />
     </div>
-
-    <!-- Informações -->
     <div class="col-12 col-md-8">
       <h5 class="fw-semibold mb-1">{{ produto.titulo }}</h5>
       <p class="text-muted small mb-2">{{ produto.descricao }}</p>
 
       <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-        <span class="badge bg-primary">{{ produto.categoria }}</span>
+        <span class="badge bg-primary"  [ngClass]="produto.categoria | categoriaCor">{{ produto.categoria}}</span>
         <span class="text-danger small d-flex align-items-center">
           <i class="bi bi-geo-alt-fill me-1"></i>{{ produto.cidade }}
         </span>
@@ -26,16 +22,12 @@
         </span>
       </div>
 
-      <h5 class="text-success fw-bold mb-0">R$ {{ produto.preco }}</h5>
+      <h5 class="text-success fw-bold mb-0">{{ produto.preco | moedaBr }}</h5>
     </div>
-
-    <!-- Botão -->
-   <!-- Botão -->
     <div class="col-12 col-md-2 text-md-end text-center mt-3 mt-md-0">
       <button class="btn btn-primary px-3 w-100 w-md-auto" 
               (click)="modalRef?.abrir()">Ver detalhes</button>
     </div>
-
   </div>
    <app-modal-detalhe-produto #modalRef [produto]="produto"></app-modal-detalhe-produto>
 </div>

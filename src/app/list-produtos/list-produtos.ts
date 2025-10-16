@@ -18,7 +18,7 @@ export class ListProdutos {
  nomePesquisa = "";
 
   constructor(private produtoService: ProdutoService) {
-    this.listaProdutos = this.produtoService.listar();
+    this.listaProdutos = this.produtoService.listar().reverse();
   }
 
 }

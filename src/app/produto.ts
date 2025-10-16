@@ -12,6 +12,5 @@ export class Produto {
   cidade?: string;
   opcoesEntrega?: string[];
   contato?: string;
-  observacoes?: string;
   dataPublicacao?: Date;
 }

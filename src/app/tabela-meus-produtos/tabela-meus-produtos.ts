@@ -4,18 +4,23 @@ import { Produto } from '../produto';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ModalDetalheProduto } from '../modal-detalhe-produto/modal-detalhe-produto';
 import { FiltroPesquisaPipe } from '../filtro-pesquisa-pipe';
+import { MoedaBrPipe } from '../moeda-br-pipe';
+
 
 
 @Component({
   selector: 'app-tabela-meus-produtos',
-  imports: [ CommonModule, RouterLink, FormsModule, FiltroPesquisaPipe ],
+  imports: [ CommonModule, RouterLink, FormsModule, FiltroPesquisaPipe, MoedaBrPipe, ModalDetalheProduto],
   templateUrl: './tabela-meus-produtos.html',
   styleUrl: './tabela-meus-produtos.css'
 })
 export class TabelaMeusProdutos {
   meusProdutos: Produto[] = [];
   nomePesquisa = "";
+  modalRef?: ModalDetalheProduto;
+
 
   constructor(private produtoService: ProdutoService) {
       this.meusProdutos =  this.produtoService.listarProdutosDoUsuario();

@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Produto } from '../produto';
 import { CommonModule } from '@angular/common';
+import { TelefonePipe } from '../telefone-pipe';
+
 
 @Component({
   selector: 'app-modal-detalhe-produto',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule , TelefonePipe],
   templateUrl: './modal-detalhe-produto.html',
 })
 export class ModalDetalheProduto {

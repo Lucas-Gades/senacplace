@@ -1,25 +1,29 @@
-<div class="container py-3" style="max-width: 700px;">
-  <h3 class="text-center fw-bold mb-3">Anunciar Produto</h3>
-  <p class="text-center text-muted mb-4">Preencha as informações para publicar seu produto</p>
+<div class="container py-3">
+  <h4 class="text-center text-success fw-bold mb-2">Anunciar Produto</h4>
+  <p class="text-center text-muted mb-4 small">Complete as informações para publicar seu produto</p>
 
   <form (ngSubmit)="salvar()" #formProduto="ngForm">
 
-    <div class="mb-4">
-      <label class="fw-bold text-primary mb-2"><i class="bi bi-camera-fill me-2"></i>Foto do Produto</label>
-      <input type="file" class="form-control mb-1"  multiple />
-      <small class="text-muted">Clique para enviar fotos (JPG, PNG, até 5MB)</small>
+    <!-- Foto e Título -->
+    <div class="row g-2 mb-3">
+      <div class="col-12 col-md-4">
+        <label class="form-label small fw-bold">Foto do Produto</label>
+        <input type="file" class="form-control form-control-sm" multiple />
+        <small class="text-muted">JPG/PNG até 5MB</small>
+      </div>
+      <div class="col-12 col-md-8">
+        <label class="form-label small fw-bold">Título do anúncio</label>
+        <input type="text" class="form-control form-control-sm" placeholder="Título" [(ngModel)]="produto.titulo" name="titulo" required />
+      </div>
     </div>
 
-    <div class="mb-4">
-      <label class="fw-bold text-success mb-1"><i class="bi bi-info-circle-fill me-2"></i>Informações básicas</label>
-      <input type="text" class="form-control mb-2" placeholder="Título do anúncio"
-             [(ngModel)]="produto.titulo" name="titulo" required>
-
-      <div class="row g-2 mb-2">
-        <div class="col-6">
-        <select class="form-select" name="categoria" required>
-          <option value="" disabled selected >Categoria</option>
-          <option value="Eletrônicos" >Eletrônicos</option>
+    <!-- Categoria, Condição e Preço -->
+    <div class="row g-2 mb-3">
+      <div class="col-12 col-md-4">
+        <label class="form-label small fw-bold">Categoria</label>
+        <select class="form-select form-select-sm" [(ngModel)]="produto.categoria" name="categoria" required>
+          <option value="" disabled selected>Selecione</option>
+          <option value="Eletrônicos">Eletrônicos</option>
           <option value="Veículos">Veículos</option>
           <option value="Roupas">Roupas</option>
           <option value="Móveis">Móveis</option>
@@ -30,88 +34,91 @@
           <option value="Serviços">Serviços</option>
           <option value="Outros">Outros</option>
         </select>
-        </div>
-        <div class="col-6">
-          <select class="form-select" name="condicao" required>
-            <option value="" selected disabled>Condição</option>
-            <option value="Novo">Novo</option>
-            <option value="Semi-novo">Semi-novo</option>
-            <option value="Usado">Usado</option>
-            <option value="Com defeito">Com defeito</option>
-          </select>
-        </div>
       </div>
-
-      <textarea class="form-control" rows="2" placeholder="Descrição do produto..."
-        [(ngModel)]="produto.descricao" name="descricao"></textarea>
-    </div>
-
-    <div class="mb-4">
-      <label class="fw-bold text-info mb-1"><i class="bi bi-cash-coin me-2"></i>Preço e negociação</label>
-      <div class="row g-2 mb-2">
-        <div class="col-6">
-          <input type="number" class="form-control" placeholder="Preço (R$)"
-                 [(ngModel)]="produto.preco" name="preco" min="0" required>
-        </div>
-        <div class="col-6">
-          <select class="form-select" [(ngModel)]="produto.formasPagamento" name="formaPagamento" required>
-            <option selected disabled>Pagamento</option>
-            <option>Dinheiro</option>
-            <option>Pix</option>
-            <option>Cartão de crédito</option>
-            <option>Cartão de débito</option>
-            <option>Transferência</option>
-          </select>
-        </div>
+      <div class="col-12 col-md-4">
+        <label class="form-label small fw-bold">Condição</label>
+        <select class="form-select form-select-sm" [(ngModel)]="produto.condicao" name="condicao" required>
+          <option value="" disabled selected>Selecione</option>
+          <option value="Novo">Novo</option>
+          <option value="Semi-novo">Semi-novo</option>
+          <option value="Usado">Usado</option>
+          <option value="Com defeito">Com defeito</option>
+        </select>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" [(ngModel)]="produto.aceitaTroca" name="aceitaTroca">
-        <label class="form-check-label">Aceito troca</label>
+      <div class="col-12 col-md-4">
+        <label class="form-label small fw-bold">Preço (R$)</label>
+        <input type="number" class="form-control form-control-sm" placeholder="Preço" [(ngModel)]="produto.preco" name="preco" min="0" required />
       </div>
     </div>
 
-    <div class="mb-4">
-      <label class="fw-bold text-warning mb-1"><i class="bi bi-geo-alt-fill me-2"></i>Localização</label>
-      <div class="row g-2">
-        <div class="col-6">
-          <select class="form-select" [(ngModel)]="produto.cidade" name="cidade" required>
-            <option selected disabled>Cidade</option>
-            <option>Porto Alegre</option>
-            <option>Canoas</option>
-            <option>Gravataí</option>
-            <option>Viamão</option>
-            <option>São Leopoldo</option>
-            <option>Pelotas</option>
-            <option>Santa Maria</option>
-            <option>Caxias do Sul</option>
-            <option>Rio Grande</option>
-            <option>Outras</option>
-          </select>
-        </div>
-        <div class="col-6">
-          <select class="form-select" [(ngModel)]="produto.opcoesEntrega" name="entrega" required>
-            <option selected disabled>Entrega</option>
-            <option>Retirada no local</option>
-            <option>Envio via correios</option>
-            <option>Entrega combinada</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="mb-4">
-      <label class="fw-bold text-danger mb-1"><i class="bi bi-person-lines-fill me-2"></i>Contato</label>
-      <input type="text" class="form-control" placeholder="WhatsApp" [(ngModel)]="produto.contato" name="whatsapp">
-    </div>
-
+    <!-- Descrição -->
     <div class="mb-3">
-      <label class="fw-bold text-primary mb-1"><i class="bi bi-chat-text-fill me-2"></i>Observações</label>
-      <textarea class="form-control" rows="2" placeholder="Informações extras..." [(ngModel)]="produto.observacoes" name="observacoes"></textarea>
+      <label class="form-label small fw-bold">Descrição</label>
+      <textarea class="form-control form-control-sm" rows="2" placeholder="Descrição do produto..." [(ngModel)]="produto.descricao" name="descricao"></textarea>
     </div>
 
-    <div class="d-grid">
-      <button class="btn btn-primary fw-bold" type="submit">PUBLICAR</button>
+    <!-- Pagamento e Troca -->
+    <div class="row g-2 mb-3 align-items-center">
+      <div class="col-9 col-md-10">
+        <label class="form-label small fw-bold">Formas de pagamento</label>
+        <select class="form-select form-select-sm" [(ngModel)]="produto.formasPagamento" name="formaPagamento" required>
+          <option value="" disabled selected>Selecione</option>
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Pix">Pix</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
+          <option value="Transferência">Transferência</option>
+        </select>
+      </div>
+      <div class="col-3 col-md-2 text-center">
+        <div class="form-check mt-2">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="produto.aceitaTroca" name="aceitaTroca" />
+          <label class="form-check-label small">Troca</label>
+        </div>
+      </div>
     </div>
+
+    <!-- Cidade e Entrega -->
+    <div class="row g-2 mb-3">
+      <div class="col-6">
+        <label class="form-label small fw-bold">Cidade</label>
+        <select class="form-select form-select-sm" [(ngModel)]="produto.cidade" name="cidade" required>
+          <option value="" selected disabled>Selecione</option>
+          <option value="Porto Alegre">Porto Alegre</option>
+          <option value="Canoas">Canoas</option>
+          <option value="Gravataí">Gravataí</option>
+          <option value="Viamão">Viamão</option>
+          <option value="São Leopoldo">São Leopoldo</option>
+          <option value="Pelotas">Pelotas</option>
+          <option value="Santa Maria">Santa Maria</option>
+          <option value="Caxias do Sul">Caxias do Sul</option>
+          <option value="Rio Grande">Rio Grande</option>
+          <option value="Outras">Outras</option>
+        </select>
+      </div>
+      <div class="col-6">
+        <label class="form-label small fw-bold">Entrega</label>
+        <select class="form-select form-select-sm" [(ngModel)]="produto.opcoesEntrega" name="entrega">
+          <option value="Retirada no local">Retirada no local</option>
+          <option value="Envio via correios">Envio via correios</option>
+          <option value="Entrega combinada">Entrega combinada</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Contato -->
+    <div class="mb-3">
+      <label class="form-label small fw-bold">Contato</label>
+      <input type="text" class="form-control form-control-sm" placeholder="Número (ex: 51999999999)" [(ngModel)]="produto.contato" name="contato" maxlength="11" (input)="validarCelular()" required />
+      <small class="text-danger" *ngIf="erroContato">Número inválido! Deve conter 11 dígitos (DDD + número).</small>
+    </div>
+
+    <!-- Botão -->
+    <div class="d-grid mb-3">
+      <button type="submit" class="btn btn-success btn-sm fw-bold">PUBLICAR</button>
+    </div>
+
   </form>
-  {{produto | json}} 
+
+  <pre class="small">{{ produto | json }}</pre>
 </div>

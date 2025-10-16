@@ -1,4 +1,4 @@
-import { JsonPipe } from '@angular/common';
+import { JsonPipe , CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProdutoService } from '../produto-service';
@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-produtos',
-  imports: [FormsModule, JsonPipe],
+  imports: [FormsModule, JsonPipe , CommonModule],
   templateUrl: './form-produto.html',
   styleUrl: './form-produto.css'
 })
@@ -28,6 +28,20 @@ export class FormProdutos {
       this.produto = this.produtoService.buscarPorId(this.id) || new Produto();
     }
   }
+
+  erroContato = false;
+
+validarCelular() {
+  if (!this.produto.contato) {
+    this.erroContato = false;
+    return;
+  }
+  const numeros = this.produto.contato.replace(/\D/g, '');
+  
+  this.erroContato = numeros.length !== 11;
+  
+  this.produto.contato = numeros;
+}
 
   salvar(){ 
     if(this.id) {
