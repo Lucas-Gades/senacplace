@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class FormProdutos {
   id?: number;
+  
   produto = new Produto();
   botaoAcao = "Cadastrar"
 
@@ -29,7 +30,7 @@ export class FormProdutos {
   }
 
   salvar(){ 
-    if(this.id) {//Editar
+    if(this.id) {
       this.produtoService.editar(this.id, this.produto);
       alert("Produto editado com sucesso!")
     }
@@ -41,7 +42,7 @@ export class FormProdutos {
   }
 
   voltar() {
-    this.router.navigate(['/tabela'])
+    this.router.navigate(['/meus-produtos']);
   }
 
 }

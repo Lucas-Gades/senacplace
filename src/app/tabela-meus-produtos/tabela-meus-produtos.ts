@@ -3,18 +3,21 @@ import { ProdutoService } from '../produto-service';
 import { Produto } from '../produto';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { FiltroPesquisaPipe } from '../filtro-pesquisa-pipe';
 
 
 @Component({
-  selector: 'app-meus-produtos',
-  imports: [ CommonModule , RouterLink],
-  templateUrl: './meus-produtos.html',
-  styleUrl: './meus-produtos.css'
+  selector: 'app-tabela-meus-produtos',
+  imports: [ CommonModule, RouterLink, FormsModule, FiltroPesquisaPipe ],
+  templateUrl: './tabela-meus-produtos.html',
+  styleUrl: './tabela-meus-produtos.css'
 })
-export class MeusProdutos {
- meusProdutos: Produto[] = [];
+export class TabelaMeusProdutos {
+  meusProdutos: Produto[] = [];
+  nomePesquisa = "";
 
-    constructor(private produtoService: ProdutoService) {
+  constructor(private produtoService: ProdutoService) {
       this.meusProdutos =  this.produtoService.listarProdutosDoUsuario();
   }
 
@@ -28,5 +31,4 @@ deletar(id?: number) {
     alert("Ação de exclusão cancelada.");
   }
 }
-
 }

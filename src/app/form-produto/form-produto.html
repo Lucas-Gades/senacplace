@@ -1,161 +1,117 @@
-<div class="container py-4">
-  <h3 class="text-center fw-bold mb-4">Anunciar Produto</h3>
-  <p class="text-center text-muted mb-5">Preencha as informações abaixo para publicar seu produto</p>
+<div class="container py-3" style="max-width: 700px;">
+  <h3 class="text-center fw-bold mb-3">Anunciar Produto</h3>
+  <p class="text-center text-muted mb-4">Preencha as informações para publicar seu produto</p>
 
   <form (ngSubmit)="salvar()" #formProduto="ngForm">
 
-    <!-- FOTO DO PRODUTO -->
-    <div class="mb-5">
-      <h5 class="fw-bold text-primary mb-3">
-        <i class="bi bi-camera-fill me-2"></i> Foto do Produto
-      </h5>
-      <div class="border rounded p-4 text-center bg-light">
-        <input type="file"  class="form-control mb-2" />
-        <small class="text-muted">Clique para enviar uma foto (JPG, PNG, até 5MB)</small>
-      </div>
+    <div class="mb-4">
+      <label class="fw-bold text-primary mb-2"><i class="bi bi-camera-fill me-2"></i>Foto do Produto</label>
+      <input type="file" class="form-control mb-1"  multiple />
+      <small class="text-muted">Clique para enviar fotos (JPG, PNG, até 5MB)</small>
     </div>
 
-    <!-- INFORMAÇÕES BÁSICAS -->
-    <div class="mb-5">
-      <h5 class="fw-bold text-success mb-3">
-        <i class="bi bi-info-circle-fill me-2"></i> Informações básicas
-      </h5>
+    <div class="mb-4">
+      <label class="fw-bold text-success mb-1"><i class="bi bi-info-circle-fill me-2"></i>Informações básicas</label>
+      <input type="text" class="form-control mb-2" placeholder="Título do anúncio"
+             [(ngModel)]="produto.titulo" name="titulo" required>
 
-      <div class="mb-3">
-        <label class="form-label">Título do anúncio</label>
-        <input type="text" class="form-control" placeholder="Ex: iPhone 13 Pro Max 256GB"
-               [(ngModel)]="produto.titulo" name="titulo" required>
-      </div>
-
-      <div class="row g-3 mb-3">
-        <div class="col-md-6">
-          <label class="form-label">Categoria</label>
-          <select class="form-select" [(ngModel)]="produto.categoria" name="categoria" required>
-            <option selected disabled>Selecione uma categoria</option>
-            <option>Eletrônicos</option>
-            <option>Veículos</option>
-            <option>Roupas</option>
-            <option>Móveis</option>
-            <option>Esportes</option>
-            <option>Brinquedos</option>
-            <option>Instrumentos Musicais</option>
-            <option>Imóveis</option>
-            <option>Serviços</option>
-            <option>Outros</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Condição</label>
-          <select class="form-select" [(ngModel)]="produto.condicao" name="condicao" required>
-            <option selected disabled>Selecione a condição</option>
-            <option>Novo</option>
-            <option>Semi-novo</option>
-            <option>Usado</option>
-            <option>Com defeito</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Descrição</label>
-        <textarea class="form-control" rows="3"
-          placeholder="Descreva o produto, condições, acessórios, estado de conservação..."
-          [(ngModel)]="produto.descricao" name="descricao"></textarea>
-      </div>
-    </div>
-
-    <!-- PREÇO E NEGOCIAÇÃO -->
-    <div class="mb-5">
-      <h5 class="fw-bold text-info mb-3">
-        <i class="bi bi-cash-coin me-2"></i> Preço e negociação
-      </h5>
-
-      <div class="mb-3">
-        <label class="form-label">Preço (R$)</label>
-        <input type="number" class="form-control" [(ngModel)]="produto.preco" name="preco" min="0" required>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Forma de pagamento</label>
-        <select class="form-select" [(ngModel)]="produto.formasPagamento" name="formaPagamento" required>
-          <option selected disabled>Selecione</option>
-          <option>Dinheiro</option>
-          <option>Pix</option>
-          <option>Cartão de crédito</option>
-          <option>Cartão de débito</option>
-          <option>Transferência</option>
+      <div class="row g-2 mb-2">
+        <div class="col-6">
+        <select class="form-select" name="categoria" required>
+          <option value="" disabled selected >Categoria</option>
+          <option value="Eletrônicos" >Eletrônicos</option>
+          <option value="Veículos">Veículos</option>
+          <option value="Roupas">Roupas</option>
+          <option value="Móveis">Móveis</option>
+          <option value="Esportes">Esportes</option>
+          <option value="Brinquedos">Brinquedos</option>
+          <option value="Instrumentos Musicais">Instrumentos Musicais</option>
+          <option value="Imóveis">Imóveis</option>
+          <option value="Serviços">Serviços</option>
+          <option value="Outros">Outros</option>
         </select>
+        </div>
+        <div class="col-6">
+          <select class="form-select" name="condicao" required>
+            <option value="" selected disabled>Condição</option>
+            <option value="Novo">Novo</option>
+            <option value="Semi-novo">Semi-novo</option>
+            <option value="Usado">Usado</option>
+            <option value="Com defeito">Com defeito</option>
+          </select>
+        </div>
       </div>
 
+      <textarea class="form-control" rows="2" placeholder="Descrição do produto..."
+        [(ngModel)]="produto.descricao" name="descricao"></textarea>
+    </div>
+
+    <div class="mb-4">
+      <label class="fw-bold text-info mb-1"><i class="bi bi-cash-coin me-2"></i>Preço e negociação</label>
+      <div class="row g-2 mb-2">
+        <div class="col-6">
+          <input type="number" class="form-control" placeholder="Preço (R$)"
+                 [(ngModel)]="produto.preco" name="preco" min="0" required>
+        </div>
+        <div class="col-6">
+          <select class="form-select" [(ngModel)]="produto.formasPagamento" name="formaPagamento" required>
+            <option selected disabled>Pagamento</option>
+            <option>Dinheiro</option>
+            <option>Pix</option>
+            <option>Cartão de crédito</option>
+            <option>Cartão de débito</option>
+            <option>Transferência</option>
+          </select>
+        </div>
+      </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" [(ngModel)]="produto.aceitaTroca" name="aceitaTroca">
         <label class="form-check-label">Aceito troca</label>
       </div>
     </div>
 
-    <!-- LOCALIZAÇÃO -->
-    <div class="mb-5">
-      <h5 class="fw-bold text-warning mb-3">
-        <i class="bi bi-geo-alt-fill me-2"></i> Localização e entrega
-      </h5>
-      <div class="mb-3">
-        <label class="form-label">Cidade</label>
-        <select class="form-select" [(ngModel)]="produto.cidade" name="cidade" required>
-          <option selected disabled>Selecione sua cidade</option>
-          <option>Porto Alegre</option>
-          <option>Canoas</option>
-          <option>Gravataí</option>
-          <option>Viamão</option>
-          <option>São Leopoldo</option>
-          <option>Pelotas</option>
-          <option>Santa Maria</option>
-          <option>Caxias do Sul</option>
-          <option>Rio Grande</option>
-          <option>Outras</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Opção de entrega</label>
-        <select class="form-select" [(ngModel)]="produto.opcoesEntrega" name="entrega" required>
-          <option selected disabled>Selecione</option>
-          <option>Retirada no local</option>
-          <option>Envio via correios</option>
-          <option>Entrega combinada</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- CONTATO -->
-    <div class="mb-5">
-      <h5 class="fw-bold text-danger mb-3">
-        <i class="bi bi-person-lines-fill me-2"></i> Contato
-      </h5>
-      <div class="row g-3">
-        <div class="col-md-6">
-          <label class="form-label">WhatsApp</label>
-          <input type="text" class="form-control" placeholder="(51) 99999-9999"
-                 [(ngModel)]="produto.contato" name="whatsapp">
-        </div>
-        </div>
-      </div>
-
-
-    <!-- OBSERVAÇÕES -->
     <div class="mb-4">
-      <h5 class="fw-bold text-primary mb-3">
-        <i class="bi bi-chat-text-fill me-2"></i> Observações adicionais
-      </h5>
-      <textarea class="form-control" rows="3"
-        placeholder="Informações extras, detalhes, regras, preferências..."
-        [(ngModel)]="produto.observacoes" name="observacoes"></textarea>
+      <label class="fw-bold text-warning mb-1"><i class="bi bi-geo-alt-fill me-2"></i>Localização</label>
+      <div class="row g-2">
+        <div class="col-6">
+          <select class="form-select" [(ngModel)]="produto.cidade" name="cidade" required>
+            <option selected disabled>Cidade</option>
+            <option>Porto Alegre</option>
+            <option>Canoas</option>
+            <option>Gravataí</option>
+            <option>Viamão</option>
+            <option>São Leopoldo</option>
+            <option>Pelotas</option>
+            <option>Santa Maria</option>
+            <option>Caxias do Sul</option>
+            <option>Rio Grande</option>
+            <option>Outras</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <select class="form-select" [(ngModel)]="produto.opcoesEntrega" name="entrega" required>
+            <option selected disabled>Entrega</option>
+            <option>Retirada no local</option>
+            <option>Envio via correios</option>
+            <option>Entrega combinada</option>
+          </select>
+        </div>
+      </div>
     </div>
 
-    <!-- BOTÃO -->
-    <div class="text-center mt-5">
-      <button class="btn btn-primary px-5 py-2 fw-bold" type="submit">PUBLICAR</button>
+    <div class="mb-4">
+      <label class="fw-bold text-danger mb-1"><i class="bi bi-person-lines-fill me-2"></i>Contato</label>
+      <input type="text" class="form-control" placeholder="WhatsApp" [(ngModel)]="produto.contato" name="whatsapp">
     </div>
 
+    <div class="mb-3">
+      <label class="fw-bold text-primary mb-1"><i class="bi bi-chat-text-fill me-2"></i>Observações</label>
+      <textarea class="form-control" rows="2" placeholder="Informações extras..." [(ngModel)]="produto.observacoes" name="observacoes"></textarea>
+    </div>
+
+    <div class="d-grid">
+      <button class="btn btn-primary fw-bold" type="submit">PUBLICAR</button>
+    </div>
   </form>
-    {{produto | json}} 
-
+  {{produto | json}} 
 </div>

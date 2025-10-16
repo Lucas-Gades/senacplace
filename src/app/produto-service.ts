@@ -9,7 +9,7 @@ import { Usuario } from './usuario';
 export class ProdutoService {
   private proxId = 7;
 
-  
+
     private usuarioLogado: Usuario = { 
     id: 1,
     nomeCompleto: 'Lucas da Silva',
@@ -32,6 +32,7 @@ export class ProdutoService {
   inserir(produto: any){
     produto.id = this.proxId++;
     produto.usuarioId = this.usuarioLogado.id; 
+    produto.dataPublicacao = new Date(); 
     this.listaProdutos.push(produto);
   }  
 
@@ -59,14 +60,14 @@ export class ProdutoService {
       this.listaProdutos.splice(indice, 1);
     }
   }
-
+  listarProdutosDoUsuario(): Produto[] {
+  return this.listaProdutos.filter(produto => produto.usuarioId === this.usuarioLogado.id);
+}
   private getIndice(id?:number) {
     return this.listaProdutos.findIndex(
       produto => produto.id == id
     );
   }
 
-  listarProdutosDoUsuario(): Produto[] {
-  return this.listaProdutos.filter(produto => produto.usuarioId === this.usuarioLogado.id);
-}
+
 }

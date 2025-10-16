@@ -1,20 +1,41 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" routerLink="/feed">SenacPlace</a>
-  <ul class="navbar-nav me-auto">
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/">Início</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/vender">Vender</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/meus-produtos">Meus Produtos</a>
-    </li>
-  </ul>
-  <ul class="navbar-nav ms-auto">
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/login">Login</a>
-    </li>
-  </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" routerLink="/feed">SenacPlace</a>
+
+    <!-- Botão hamburguer (menu mobile) -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Itens do menu -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/vender">Vender</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/meus-produtos">Meus Produtos</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="btn btn-light text-primary fw-semibold px-3" routerLink="/login">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
+
 <router-outlet />

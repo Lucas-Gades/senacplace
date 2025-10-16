@@ -1,0 +1,22 @@
+<div class="modal fade show" [ngClass]="{'d-block': showModal}" tabindex="-1" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ produto?.titulo }}</h5>
+        <button type="button" class="btn-close" (click)="fechar()"></button>
+      </div>
+      <div class="modal-body">
+        <img src="/imagem.png" alt="Foto do produto" class="img-fluid mb-3 rounded border" style="max-height: 200px; object-fit: cover;">
+        <p><strong>Categoria:</strong> {{ produto?.categoria }}</p>
+        <p><strong>Condição:</strong> {{ produto?.condicao }}</p>
+        <p><strong>Descrição:</strong> {{ produto?.descricao }}</p>
+        <p><strong>Preço:</strong> R$ {{ produto?.preco }}</p>
+        <p><strong>Cidade:</strong> {{ produto?.cidade }}</p>
+        <p><strong>Data de publicação:</strong> {{ produto?.dataPublicacao | date:'dd/MM/yyyy' }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="fechar()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
