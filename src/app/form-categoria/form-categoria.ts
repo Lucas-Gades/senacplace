@@ -16,7 +16,7 @@ import { ProdutoService } from '../produto-service';
 export class FormCategoria {
   categoria = new Categoria();
   botaoAcao = "Adicionar"
-  id: number = 0;
+  id?: number;
   categoriaService = inject(CategoriaService);
   route = inject(ActivatedRoute);
   router = inject(Router);
@@ -33,12 +33,14 @@ export class FormCategoria {
     if(this.id) {
       this.categoriaService.editar(this.id, this.categoria);
       alert("Categoria editada com sucesso!")
+      this.router.navigate(['/categorias']);
     }
 
     else {
       this.categoriaService.inserir(this.categoria);
       alert("Categoria cadastrada com sucesso!")
       this.categoria = new Categoria();  
+      this.router.navigate(['/categorias']);
     }
   }
 

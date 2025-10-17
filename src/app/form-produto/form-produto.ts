@@ -1,6 +1,6 @@
 import { JsonPipe , CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule ,  } from '@angular/forms';
 import { ProdutoService } from '../produto-service';
 import { Produto } from '../produto';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,7 +13,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class FormProdutos {
   id?: number;
-  
   produto = new Produto();
   botaoAcao = "Publicar"
 
@@ -48,11 +47,15 @@ validarCelular() {
     if(this.id) {
       this.produtoService.editar(this.id, this.produto);
       alert("Produto editado com sucesso!")
+      this.router.navigate(['/meus-produtos']);
+
     }
     else {
       this.produtoService.inserir(this.produto);
       alert("Produto cadastrado com sucesso!")
       this.produto = new Produto();  
+       this.router.navigate(['/meus-produtos']);
+
     } 
   }
 

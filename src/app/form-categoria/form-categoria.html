@@ -3,15 +3,26 @@
   <p class="text-center text-muted mb-4 small">Complete as informações para publicar sua categoria</p>
 
   <form (ngSubmit)="salvar()" #formProduto="ngForm">
+
     <div class="row g-2 mb-3">
       <div class="col-12 col-md-8">
         <label class="form-label small fw-bold">Categoria</label>
-        <input type="text" class="form-control form-control-sm" placeholder="Digite o nome da categoria" [(ngModel)]="categoria.nomeCategoria" name="nomeCategoria" required />
+        <input type="text" class="form-control form-control-sm" 
+               placeholder="Digite o nome da categoria"
+               [(ngModel)]="categoria.nomeCategoria" 
+               name="nomeCategoria" required 
+               #nomeCategoria="ngModel" />
+        <div class="text-danger small" *ngIf="formProduto.submitted && nomeCategoria.invalid">
+          Nome da categoria obrigatório.
+        </div>
       </div>
     </div>
+
     <div class="d-grid mb-3">
-      <button type="submit" class="btn btn-success btn-sm fw-bold">{{ botaoAcao }}</button>
+      <button type="submit" class="btn btn-success btn-sm fw-bold"
+              [disabled]="formProduto.invalid">{{ botaoAcao }}</button>
     </div>
+
   </form>
 
   <pre class="small">{{ categoria | json }}</pre>

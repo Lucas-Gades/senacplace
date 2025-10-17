@@ -4,7 +4,6 @@
 
   <form (ngSubmit)="salvar()" #formProduto="ngForm">
 
-    <!-- Foto e Título -->
     <div class="row g-2 mb-3">
       <div class="col-12 col-md-4">
         <label class="form-label small fw-bold">Foto do Produto</label>
@@ -13,55 +12,66 @@
       </div>
       <div class="col-12 col-md-8">
         <label class="form-label small fw-bold">Título do anúncio</label>
-        <input type="text" class="form-control form-control-sm" placeholder="Título" [(ngModel)]="produto.titulo" name="titulo" required />
+        <input type="text" class="form-control form-control-sm" placeholder="Título"
+               [(ngModel)]="produto.titulo" name="titulo" required #titulo="ngModel" />
+        <div class="text-danger small" *ngIf="formProduto.submitted && titulo.invalid">
+          Título obrigatório.
+        </div>
       </div>
     </div>
 
-    <!-- Categoria, Condição e Preço -->
     <div class="row g-2 mb-3">
       <div class="col-12 col-md-4">
         <label class="form-label small fw-bold">Categoria</label>
-        <select class="form-select form-select-sm" [(ngModel)]="produto.categoria" name="categoria" required>
+        <select class="form-select form-select-sm" [(ngModel)]="produto.categoria" name="categoria" required #categoria="ngModel">
           <option value="" disabled selected>Selecione</option>
           <option value="Eletrônicos">Eletrônicos</option>
           <option value="Veículos">Veículos</option>
           <option value="Roupas">Roupas</option>
           <option value="Móveis">Móveis</option>
           <option value="Esportes">Esportes</option>
-          <option value="Brinquedos">Brinquedos</option>
           <option value="Instrumentos Musicais">Instrumentos Musicais</option>
           <option value="Imóveis">Imóveis</option>
           <option value="Serviços">Serviços</option>
           <option value="Outros">Outros</option>
         </select>
+        <div class="text-danger small" *ngIf="formProduto.submitted && categoria.invalid">
+          Selecione uma categoria.
+        </div>
       </div>
       <div class="col-12 col-md-4">
         <label class="form-label small fw-bold">Condição</label>
-        <select class="form-select form-select-sm" [(ngModel)]="produto.condicao" name="condicao" required>
+        <select class="form-select form-select-sm" [(ngModel)]="produto.condicao" name="condicao" required #condicao="ngModel">
           <option value="" disabled selected>Selecione</option>
           <option value="Novo">Novo</option>
           <option value="Semi-novo">Semi-novo</option>
           <option value="Usado">Usado</option>
           <option value="Com defeito">Com defeito</option>
         </select>
+        <div class="text-danger small" *ngIf="formProduto.submitted && condicao.invalid">
+          Selecione a condição.
+        </div>
       </div>
       <div class="col-12 col-md-4">
         <label class="form-label small fw-bold">Preço (R$)</label>
-        <input type="number" class="form-control form-control-sm" placeholder="Preço" [(ngModel)]="produto.preco" name="preco" min="0" required />
+        <input type="number" class="form-control form-control-sm" placeholder="Preço"
+               [(ngModel)]="produto.preco" name="preco" min="0.01" required #preco="ngModel" />
+        <div class="text-danger small" *ngIf="formProduto.submitted && preco.invalid">
+          Insira um preço válido.
+        </div>
       </div>
     </div>
 
-    <!-- Descrição -->
     <div class="mb-3">
       <label class="form-label small fw-bold">Descrição</label>
-      <textarea class="form-control form-control-sm" rows="2" placeholder="Descrição do produto..." [(ngModel)]="produto.descricao" name="descricao"></textarea>
+      <textarea class="form-control form-control-sm" rows="2" placeholder="Descrição do produto..."
+                [(ngModel)]="produto.descricao" name="descricao" #descricao="ngModel"></textarea>
     </div>
 
-    <!-- Pagamento e Troca -->
     <div class="row g-2 mb-3 align-items-center">
       <div class="col-9 col-md-10">
         <label class="form-label small fw-bold">Formas de pagamento</label>
-        <select class="form-select form-select-sm" [(ngModel)]="produto.formasPagamento" name="formaPagamento" required>
+        <select class="form-select form-select-sm" [(ngModel)]="produto.formasPagamento" name="formaPagamento" required #formasPagamento="ngModel">
           <option value="" disabled selected>Selecione</option>
           <option value="Dinheiro">Dinheiro</option>
           <option value="Pix">Pix</option>
@@ -69,6 +79,9 @@
           <option value="Cartão de débito">Cartão de débito</option>
           <option value="Transferência">Transferência</option>
         </select>
+        <div class="text-danger small" *ngIf="formProduto.submitted && formasPagamento.invalid">
+          Selecione uma forma de pagamento.
+        </div>
       </div>
       <div class="col-3 col-md-2 text-center">
         <div class="form-check mt-2">
@@ -78,12 +91,11 @@
       </div>
     </div>
 
-    <!-- Cidade e Entrega -->
     <div class="row g-2 mb-3">
       <div class="col-6">
         <label class="form-label small fw-bold">Cidade</label>
-        <select class="form-select form-select-sm" [(ngModel)]="produto.cidade" name="cidade" required>
-          <option value="" selected disabled>Selecione</option>
+        <select class="form-select form-select-sm" [(ngModel)]="produto.cidade" name="cidade" required #cidade="ngModel">
+          <option value="" disabled selected>Selecione</option>
           <option value="Porto Alegre">Porto Alegre</option>
           <option value="Canoas">Canoas</option>
           <option value="Gravataí">Gravataí</option>
@@ -95,28 +107,38 @@
           <option value="Rio Grande">Rio Grande</option>
           <option value="Outras">Outras</option>
         </select>
+        <div class="text-danger small" *ngIf="formProduto.submitted && cidade.invalid">
+          Selecione uma cidade.
+        </div>
       </div>
       <div class="col-6">
         <label class="form-label small fw-bold">Entrega</label>
-        <select class="form-select form-select-sm" [(ngModel)]="produto.opcoesEntrega" name="entrega">
+        <select class="form-select form-select-sm" [(ngModel)]="produto.opcoesEntrega" name="entrega" required #entrega="ngModel">
+          <option value="" disabled selected>Selecione</option>
           <option value="Retirada no local">Retirada no local</option>
           <option value="Envio via correios">Envio via correios</option>
           <option value="Entrega combinada">Entrega combinada</option>
         </select>
+        <div class="text-danger small" *ngIf="formProduto.submitted && entrega.invalid">
+          Selecione a entrega.
+        </div>
       </div>
     </div>
 
-    <!-- Contato -->
     <div class="mb-3">
       <label class="form-label small fw-bold">Contato</label>
-      <input type="text" class="form-control form-control-sm" placeholder="Número (ex: 51999999999)" [(ngModel)]="produto.contato" name="contato" maxlength="11" (input)="validarCelular()" required />
-      <small class="text-danger" *ngIf="erroContato">Número inválido! Deve conter 11 dígitos (DDD + número).</small>
+      <input type="text" class="form-control form-control-sm"
+             placeholder="Número (ex: 51999999999)"
+             [(ngModel)]="produto.contato" name="contato" maxlength="11" required
+             pattern="^[0-9]{11}$" #contato="ngModel" />
+      <div class="text-danger small" *ngIf="formProduto.submitted && contato.invalid">
+        Número inválido! Deve conter 11 dígitos (DDD + número).
+      </div>
     </div>
 
-    <!-- Botão -->
-    <!-- Botão -->
     <div class="d-grid mb-3">
-      <button type="submit" class="btn btn-success btn-sm fw-bold">{{ botaoAcao }}</button>
+      <button type="submit" class="btn btn-success btn-sm fw-bold"
+              [disabled]="formProduto.invalid">{{ botaoAcao }}</button>
     </div>
   </form>
 

@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="navbarContent">
  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   @if (auth.estaLogado()) {
-    <li class="nav-item"><a class="nav-link" routerLink="/">Início</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="/inicio">Início</a></li>
     <li class="nav-item"><a class="nav-link" routerLink="/vender">Vender</a></li>
     <li class="nav-item"><a class="nav-link" routerLink="/meus-produtos">Meus Produtos</a></li>
 
@@ -27,14 +27,10 @@
   }
 </ul>
       <ul class="navbar-nav ms-auto logo">
-        <!-- Quando estiver logado -->
         <li class="nav-item" *ngIf="auth.estaLogado()">
           <button class="btn btn-light text-danger fw-semibold px-3"(click)="sair()">
             Sair
           </button>
-        </li>
-
-        <!-- Quando não estiver logado -->
         <li class="nav-item" *ngIf="!auth.estaLogado()">
           <a class="btn btn-light text-primary fw-semibold px-3" routerLink="/inicio">Login</a>
         </li>

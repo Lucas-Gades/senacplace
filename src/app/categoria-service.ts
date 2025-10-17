@@ -6,7 +6,7 @@ import { Categoria } from './categoria';
   providedIn: 'root'
 })
 export class CategoriaService {
-  private proxId = 6;
+  private proxId = 7;
 
   listaCategorias: Categoria[] = [
     { id: 1, nomeCategoria: 'Eletrônicos' },
