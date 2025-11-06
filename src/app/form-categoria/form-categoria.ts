@@ -43,7 +43,7 @@ export class FormCategoria {
       this.router.navigate(['/categorias']);
     }
   }
-
+                                                                                                        
   voltar() {
     this.router.navigate(['/categorias']);
   }
