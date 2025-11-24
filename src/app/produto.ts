@@ -7,10 +7,7 @@ export class Produto {
   descricao?: string;
   preco?: number;
   fotos?: string[];
-  formasPagamento?: string[];
-  aceitaTroca?: boolean;
   cidade?: string;
-  opcoesEntrega?: string[];
   contato?: string;
   dataPublicacao?: Date;
 }

@@ -2,14 +2,18 @@
   <h4 class="text-center text-success fw-bold mb-2">Anunciar Produto</h4>
   <p class="text-center text-muted mb-4 small">Complete as informações para publicar seu produto</p>
 
-  <form (ngSubmit)="salvar()" #formProduto="ngForm">
+  <form (ngSubmit)="salvar()" #formProduto="ngForm" novalidate>
+
+    <!-- usuarioId (hidden) -->
+    <input type="hidden" [(ngModel)]="produto.usuarioId" name="usuarioId" />
 
     <div class="row g-2 mb-3">
       <div class="col-12 col-md-4">
-        <label class="form-label small fw-bold">Foto do Produto</label>
-        <input type="file" class="form-control form-control-sm" multiple />
+        <label class="form-label small fw-bold">Fotos do Produto</label>
+        <input type="file" class="form-control form-control-sm" multiple accept="image/*" />
         <small class="text-muted">JPG/PNG até 5MB</small>
       </div>
+
       <div class="col-12 col-md-8">
         <label class="form-label small fw-bold">Título do anúncio</label>
         <input type="text" class="form-control form-control-sm" placeholder="Título"
@@ -24,7 +28,7 @@
       <div class="col-12 col-md-4">
         <label class="form-label small fw-bold">Categoria</label>
         <select class="form-select form-select-sm" [(ngModel)]="produto.categoria" name="categoria" required #categoria="ngModel">
-          <option value="" disabled selected>Selecione</option>
+          <option value="" disabled>Selecione</option>
           <option value="Eletrônicos">Eletrônicos</option>
           <option value="Veículos">Veículos</option>
           <option value="Roupas">Roupas</option>
@@ -39,10 +43,11 @@
           Selecione uma categoria.
         </div>
       </div>
+
       <div class="col-12 col-md-4">
         <label class="form-label small fw-bold">Condição</label>
         <select class="form-select form-select-sm" [(ngModel)]="produto.condicao" name="condicao" required #condicao="ngModel">
-          <option value="" disabled selected>Selecione</option>
+          <option value="" disabled>Selecione</option>
           <option value="Novo">Novo</option>
           <option value="Semi-novo">Semi-novo</option>
           <option value="Usado">Usado</option>
@@ -52,6 +57,7 @@
           Selecione a condição.
         </div>
       </div>
+
       <div class="col-12 col-md-4">
         <label class="form-label small fw-bold">Preço (R$)</label>
         <input type="number" class="form-control form-control-sm" placeholder="Preço"
@@ -64,81 +70,56 @@
 
     <div class="mb-3">
       <label class="form-label small fw-bold">Descrição</label>
-      <textarea class="form-control form-control-sm" rows="2" placeholder="Descrição do produto..."
+      <textarea class="form-control form-control-sm" rows="3" placeholder="Descrição do produto..."
                 [(ngModel)]="produto.descricao" name="descricao" #descricao="ngModel"></textarea>
     </div>
 
-    <div class="row g-2 mb-3 align-items-center">
-      <div class="col-9 col-md-10">
-        <label class="form-label small fw-bold">Formas de pagamento</label>
-        <select class="form-select form-select-sm" [(ngModel)]="produto.formasPagamento" name="formaPagamento" required #formasPagamento="ngModel">
-          <option value="" disabled selected>Selecione</option>
-          <option value="Dinheiro">Dinheiro</option>
-          <option value="Pix">Pix</option>
-          <option value="Cartão de crédito">Cartão de crédito</option>
-          <option value="Cartão de débito">Cartão de débito</option>
-          <option value="Transferência">Transferência</option>
-        </select>
-        <div class="text-danger small" *ngIf="formProduto.submitted && formasPagamento.invalid">
-          Selecione uma forma de pagamento.
-        </div>
-      </div>
-      <div class="col-3 col-md-2 text-center">
-        <div class="form-check mt-2">
-          <input class="form-check-input" type="checkbox" [(ngModel)]="produto.aceitaTroca" name="aceitaTroca" />
-          <label class="form-check-label small">Troca</label>
-        </div>
-      </div>
-    </div>
-
+    <!-- Cidades do Sul (RS) -->
     <div class="row g-2 mb-3">
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <label class="form-label small fw-bold">Cidade</label>
         <select class="form-select form-select-sm" [(ngModel)]="produto.cidade" name="cidade" required #cidade="ngModel">
-          <option value="" disabled selected>Selecione</option>
+          <option value="" disabled>Selecione</option>
           <option value="Porto Alegre">Porto Alegre</option>
-          <option value="Canoas">Canoas</option>
           <option value="Gravataí">Gravataí</option>
+          <option value="Alvorada">Alvorada</option>
+          <option value="Canoas">Canoas</option>
           <option value="Viamão">Viamão</option>
           <option value="São Leopoldo">São Leopoldo</option>
           <option value="Pelotas">Pelotas</option>
           <option value="Santa Maria">Santa Maria</option>
           <option value="Caxias do Sul">Caxias do Sul</option>
           <option value="Rio Grande">Rio Grande</option>
-          <option value="Outras">Outras</option>
+          <option value="Novo Hamburgo">Novo Hamburgo</option>
+          <option value="Bagé">Bagé</option>
         </select>
         <div class="text-danger small" *ngIf="formProduto.submitted && cidade.invalid">
           Selecione uma cidade.
         </div>
       </div>
-      <div class="col-6">
-        <label class="form-label small fw-bold">Entrega</label>
-        <select class="form-select form-select-sm" [(ngModel)]="produto.opcoesEntrega" name="entrega" required #entrega="ngModel">
-          <option value="" disabled selected>Selecione</option>
-          <option value="Retirada no local">Retirada no local</option>
-          <option value="Envio via correios">Envio via correios</option>
-          <option value="Entrega combinada">Entrega combinada</option>
-        </select>
-        <div class="text-danger small" *ngIf="formProduto.submitted && entrega.invalid">
-          Selecione a entrega.
+
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-bold">Contato</label>
+        <input type="text" class="form-control form-control-sm"
+               placeholder="Número (ex: 51999999999)"
+               [(ngModel)]="produto.contato" name="contato" maxlength="11" required
+               pattern="^[0-9]{11}$" #contato="ngModel" (blur)="validarCelular()" />
+        <div class="text-danger small" *ngIf="formProduto.submitted && contato.invalid">
+          Número inválido! Deve conter 11 dígitos (DDD + número).
         </div>
       </div>
     </div>
 
+    <!-- mostra a data de publicação (será preenchida no salvar) -->
     <div class="mb-3">
-      <label class="form-label small fw-bold">Contato</label>
-      <input type="text" class="form-control form-control-sm"
-             placeholder="Número (ex: 51999999999)"
-             [(ngModel)]="produto.contato" name="contato" maxlength="11" required
-             pattern="^[0-9]{11}$" #contato="ngModel" />
-      <div class="text-danger small" *ngIf="formProduto.submitted && contato.invalid">
-        Número inválido! Deve conter 11 dígitos (DDD + número).
-      </div>
+      <label class="form-label small fw-bold">Data de publicação</label>
+      <input type="text" class="form-control form-control-sm" [value]="produto.dataPublicacao ? (produto.dataPublicacao | date:'short') : ''" readonly />
     </div>
 
     <div class="d-grid mb-3">
-      <button type="submit" class="btn btn-success btn-sm fw-bold"
-              [disabled]="formProduto.invalid">{{ botaoAcao }}</button>
+      <button type="submit" class="btn btn-success btn-sm fw-bold" [disabled]="formProduto.invalid">
+        {{ botaoAcao }}
+      </button>
     </div>
   </form>
 

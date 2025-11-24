@@ -16,9 +16,6 @@
         <p><strong>Data de publicação:</strong> {{ produto?.dataPublicacao | date:'dd/MM/yyyy' }}</p>
         <p><strong>Contato:</strong><a>{{ produto?.contato | telefone}}</a></p>
         <hr>
-        <p><strong>Opções de entrega:</strong> {{ produto?.opcoesEntrega }}</p>
-        <p><strong>Aceita troca:</strong> {{ produto?.aceitaTroca ? 'Sim' : 'Não' }}</p>
-        <p><strong>Formas de pagamento:</strong> {{ produto?.formasPagamento }}</p>
       </div>
 
       <div class="modal-footer d-flex justify-content-between">
