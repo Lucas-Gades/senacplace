@@ -24,23 +24,29 @@ export class FormCategoria {
 
   constructor() {
     this.id = +this.route.snapshot.params['id'];
-    if(this.id) {
-      this.botaoAcao = "Editar";
-      this.categoria = this.categoriaService.buscarPorId(this.id) || new Categoria();
+    if (this.id) {
+      this.botaoAcao = 'Editar';
+      this.categoriaService.listarCategoria().then(categorias => {
+        const cat = categorias.find(c => c.id == this.id);
+        this.categoria = cat ? cat : new Categoria();
+      });
     }
   }
-  salvar(){ 
-    if(this.id) {
-      this.categoriaService.editar(this.id, this.categoria);
-      alert("Categoria editada com sucesso!")
-      this.router.navigate(['/categorias']);
-    }
 
-    else {
-      this.categoriaService.inserir(this.categoria);
-      alert("Categoria cadastrada com sucesso!")
-      this.categoria = new Categoria();  
-      this.router.navigate(['/categorias']);
+  async salvar() {
+    try {
+      if (this.id) {
+        await this.categoriaService.editar(this.id, this.categoria);
+        alert('Categoria editada com sucesso!');
+        this.router.navigate(['/categorias']);
+      } else {
+        await this.categoriaService.inserir(this.categoria);
+        alert('Categoria cadastrada com sucesso!');
+        this.categoria = new Categoria();
+        this.router.navigate(['/categorias']);
+      }
+    } catch (error) {
+      alert('Erro ao salvar categoria!');
     }
   }
                                                                                                         

@@ -22,10 +22,11 @@ export class FormProdutos {
 
   constructor() {
     this.id = +this.route.snapshot.params['id'];
-    if(this.id) {
-      this.botaoAcao = "Editar";
-      this.produto = this.produtoService.buscarPorId(this.id) || new Produto();
-
+    if (this.id) {
+      this.botaoAcao = 'Editar';
+      this.produtoService.buscarPorId(this.id).then(produto => {
+        this.produto = produto || new Produto();
+      });
     }
   }
 
@@ -43,20 +44,22 @@ validarCelular() {
   this.produto.contato = numeros;
 }
 
-  salvar(){ 
-    if(this.id) {
-      this.produtoService.editar(this.id, this.produto);
-      alert("Produto editado com sucesso!")
-      this.router.navigate(['/meus-produtos']);
-
+  async salvar() {
+    try {
+      if (this.id) {
+        await this.produtoService.editar(this.id, this.produto);
+        alert('Produto editado com sucesso!');
+        this.router.navigate(['/meus-produtos']);
+      } else {
+        await this.produtoService.inserir(this.produto);
+        alert('Produto cadastrado com sucesso!');
+        this.produto = new Produto();
+        this.router.navigate(['/meus-produtos']);
+      }
+    } catch (error) {
+      console.error('Erro detalhado ao salvar produto:', error);
+      alert('Erro ao salvar produto!');
     }
-    else {
-      this.produtoService.inserir(this.produto);
-      alert("Produto cadastrado com sucesso!")
-      this.produto = new Produto();  
-       this.router.navigate(['/meus-produtos']);
-
-    } 
   }
 
   voltar() {

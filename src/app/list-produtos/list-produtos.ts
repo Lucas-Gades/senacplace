@@ -18,7 +18,11 @@ export class ListProdutos {
  nomePesquisa = "";
 
   constructor(private produtoService: ProdutoService) {
-    this.listaProdutos = this.produtoService.listar().reverse();
+    this.carregarProdutos();
+  }
+
+  async carregarProdutos() {
+    this.listaProdutos = (await this.produtoService.listar()).reverse();
   }
 
 }

@@ -13,18 +13,23 @@ import { FormsModule } from '@angular/forms';
 })
 export class TabelaCategorias {
   categorias: Categoria[] = [];
-  
+
   constructor(private categoriaService: CategoriaService) {
-      this.categorias =  this.categoriaService.listarCategoria();
+    this.carregarCategorias();
   }
-  deletar(id?: number) {
-  const categoria = this.categorias.find(c => c.id === id);
-  if (categoria && confirm(`Tem certeza que deseja excluir a categoria "${categoria.nomeCategoria}"?`)) {
-    this.categoriaService.deletar(id);
-    alert(`A categoria "${categoria.nomeCategoria}" foi deletada com sucesso!`);
-    this.categorias = this.categorias.filter(c => c.id !== id);
-  } else {
-    alert("Ação de exclusão cancelada.");
+
+  async carregarCategorias() {
+    this.categorias = await this.categoriaService.listarCategoria();
   }
-}
+
+  async deletar(id?: number) {
+    const categoria = this.categorias.find(c => c.id === id);
+    if (categoria && confirm(`Tem certeza que deseja excluir a categoria "${categoria.nomeCategoria}"?`)) {
+      await this.categoriaService.deletar(id!);
+      alert(`A categoria "${categoria.nomeCategoria}" foi deletada com sucesso!`);
+      await this.carregarCategorias();
+    } else {
+      alert("Ação de exclusão cancelada.");
+    }
+  }
 }

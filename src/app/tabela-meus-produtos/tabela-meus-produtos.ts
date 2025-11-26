@@ -21,19 +21,22 @@ export class TabelaMeusProdutos {
   nomePesquisa = "";
   modalRef?: ModalDetalheProduto;
 
-
   constructor(private produtoService: ProdutoService) {
-      this.meusProdutos =  this.produtoService.listarProdutosDoUsuario();
+    this.carregarMeusProdutos();
   }
 
-deletar(id?: number) {
-  const produto = this.meusProdutos.find(p => p.id === id);
-  if (produto && confirm(`Tem certeza que deseja excluir o produto "${produto.titulo}"?`)) {
-    this.produtoService.deletar(id);
-    alert(`O produto "${produto.titulo}" foi deletado com sucesso!`);
-    this.meusProdutos = this.meusProdutos.filter(p => p.id !== id);
-  } else {
-    alert("Ação de exclusão cancelada.");
+  async carregarMeusProdutos() {
+    this.meusProdutos = await this.produtoService.listarProdutosDoUsuario();
   }
-}
+
+  async deletar(id?: number) {
+    const produto = this.meusProdutos.find(p => p.id === id);
+    if (produto && confirm(`Tem certeza que deseja excluir o produto "${produto.titulo}"?`)) {
+      await this.produtoService.deletar(id!);
+      alert(`O produto "${produto.titulo}" foi deletado com sucesso!`);
+      await this.carregarMeusProdutos();
+    } else {
+      alert("Ação de exclusão cancelada.");
+    }
+  }
 }

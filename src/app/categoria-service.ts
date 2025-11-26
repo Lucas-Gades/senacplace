@@ -1,54 +1,31 @@
 import { Injectable } from '@angular/core';
+import { SupabaseApi } from './supabase-api';
 import { Categoria } from './categoria';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoriaService {
-  private proxId = 7;
+  constructor(private supabaseApi: SupabaseApi) {}
 
-  listaCategorias: Categoria[] = [
-    { id: 1, nomeCategoria: 'Eletrônicos' },
-    { id: 2, nomeCategoria: 'Móveis' },
-    { id: 3, nomeCategoria: 'Roupas' },
-    { id: 4, nomeCategoria: 'Calçados' },
-    { id: 5, nomeCategoria: 'Livros' },
-    { id: 6, nomeCategoria: 'Esportes' }
-  ];
-
-  inserir(categoria: any){
-    categoria.id = this.proxId++;
-    this.listaCategorias.push(categoria);
-  }  
-
-  listarCategoria() {
-    return this.listaCategorias;
+  async listarCategoria(): Promise<Categoria[]> {
+    const { data, error } = await this.supabaseApi.supabase.from('categorias').select('*').order('id', { ascending: true });
+    if (error) throw error;
+    return data || [];
   }
 
-  buscarPorId(id?: number) {
-    const categoria = this.listaCategorias.find(
-      categoria => categoria.id == id
-    );
-    return Object.assign({}, categoria);
-  }
-  editar(id: number, categoria: Categoria) {
-    const indice = this.getIndice(id);
-    if(indice >= 0) {
-      this.listaCategorias[indice] = categoria;
-    }
+  async inserir(categoria: Categoria): Promise<void> {
+    const { error } = await this.supabaseApi.supabase.from('categorias').insert([{ nomeCategoria: categoria.nomeCategoria }]);
+    if (error) throw error;
   }
 
-  deletar(id?:number) {
-    const indice = this.getIndice(id);
-    if(indice >=0){
-      this.listaCategorias.splice(indice, 1);
-    }
+  async editar(id: number, categoria: Categoria): Promise<void> {
+    const { error } = await this.supabaseApi.supabase.from('categorias').update({ nomeCategoria: categoria.nomeCategoria }).eq('id', id);
+    if (error) throw error;
   }
 
-  private getIndice(id?: number) {
-    return this.listaCategorias.findIndex(
-      categoria => categoria.id == id
-    );
-  }     
+  async deletar(id: number): Promise<void> {
+    const { error } = await this.supabaseApi.supabase.from('categorias').delete().eq('id', id);
+    if (error) throw error;
+  }
 }
