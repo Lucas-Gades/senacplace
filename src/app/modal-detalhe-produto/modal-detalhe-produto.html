@@ -13,7 +13,7 @@
         <p><strong>Descrição:</strong> {{ produto?.descricao }}</p>
         <p><strong>Preço:</strong> R$ {{ produto?.preco }}</p>
         <p><strong>Cidade:</strong> {{ produto?.cidade }}</p>
-        <p><strong>Data de publicação:</strong> {{ produto?.datapublicacao | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Data de publicação:</strong> {{ produto?.dataPublicacao | date:'dd/MM/yyyy' }}</p>
         <p><strong>Contato:</strong><a>{{ produto?.contato | telefone}}</a></p>
         <hr>
       </div>

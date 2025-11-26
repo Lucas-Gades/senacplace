@@ -25,14 +25,14 @@ export class ProdutoService {
   }
 
   async inserir(produto: Produto): Promise<void> {
-    // Remover dataPublicacao do objeto enviado, garantir só datapublicacao
-    const { dataPublicacao, ...produtoSemData } = produto;
+    // Remover id e dataPublicacao do objeto enviado
+    const { id, dataPublicacao, ...produtoSemIdEData } = produto;
     const { error } = await this.supabaseApi.supabase.from('produtos').insert([
       {
-        ...produtoSemData,
+        ...produtoSemIdEData,
         fotos: produto.fotos ?? [],
         usuarioId: this.usuarioLogado.id,
-        datapublicacao: new Date().toISOString(),
+        dataPublicacao: new Date().toISOString(),
       },
     ]);
     if (error) throw error;
