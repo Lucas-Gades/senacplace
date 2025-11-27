@@ -1,6 +1,6 @@
 export class Produto {
   id?: number;
-  usuarioId?: number;
+  usuarioId?: string;
   titulo?: string;
   categoria?: string;
   condicao?: string;

@@ -1,39 +1,54 @@
-
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { SupabaseApi } from '../supabase-api';
+import { User, Session } from '@supabase/supabase-js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // Usuários mockados
-  private usuarios = [
-    { usuario: 'admin', senha: '1234', token: 'mock-token-admin' },
-    { usuario: 'user', senha: 'abcd', token: 'mock-token-user' }
-  ];
+  private _session: Session | null = null;
+  
+  constructor(private supabaseApi: SupabaseApi) {
+    this.supabaseApi.supabase.auth.onAuthStateChange((event, session) => {
+      this._session = session;
+    });
+    this.supabaseApi.supabase.auth.getSession().then(({ data }) => {
+      this._session = data.session;
+    });
+  }
 
-  login(username: string, senha: string): Observable<boolean> {
-    const user = this.usuarios.find(u => u.usuario === username && u.senha === senha);
-    if (user) {
-      sessionStorage.setItem('token', user.token);
-      sessionStorage.setItem('usuario', user.usuario);
-      return of(true);
-    } else {
-      return of(false);
+  async login(email: string, senha: string): Promise<boolean> {
+    const { data, error } = await this.supabaseApi.supabase.auth.signInWithPassword({
+      email: email,
+      password: senha,
+    });
+
+    if (error) {
+      console.error('Erro no login:', error.message);
+      return false;
     }
+    return true;
+  }
+
+  async logout(): Promise<void> {
+    await this.supabaseApi.supabase.auth.signOut();
+  }
+
+  async getSession(): Promise<Session | null> {
+    const { data } = await this.supabaseApi.supabase.auth.getSession();
+    return data.session;
+  }
+
+  async getUser(): Promise<User | null> {
+    const { data } = await this.supabaseApi.supabase.auth.getUser();
+    return data.user;
   }
 
   estaLogado(): boolean {
-    const token = sessionStorage.getItem('token');
-    return token !== undefined && token !== null;
-  }
-    ehAdmin(): boolean { 
-    const usuario = sessionStorage.getItem('usuario');
-    return usuario === 'admin';
+    return !!this._session;
   }
 
-  logout(): void {
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('usuario');
+  ehAdmin(): boolean {
+    return false; // Implementar lógica de admin se necessário
   }
 }

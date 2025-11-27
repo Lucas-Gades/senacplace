@@ -7,6 +7,8 @@ import { Produto } from '../produto';
 import { Categoria } from '../categoria';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { ToastService } from '../toast.component';
+
 @Component({
   selector: 'app-form-produtos',
   imports: [FormsModule, JsonPipe , CommonModule],
@@ -22,6 +24,7 @@ export class FormProdutos {
   categoriaService = inject(CategoriaService);
   route = inject(ActivatedRoute);
   router = inject(Router);
+  toastService = inject(ToastService);
   listaCategorias: Categoria[] = [];
 
   constructor() {
@@ -57,17 +60,17 @@ validarCelular() {
     try {
       if (this.id) {
         await this.produtoService.editar(this.id, this.produto);
-        alert('Produto editado com sucesso!');
+        this.toastService.show('Produto editado com sucesso!', 'success');
         this.router.navigate(['/meus-produtos']);
       } else {
         await this.produtoService.inserir(this.produto);
-        alert('Produto cadastrado com sucesso!');
+        this.toastService.show('Produto cadastrado com sucesso!', 'success');
         this.produto = new Produto();
         this.router.navigate(['/meus-produtos']);
       }
     } catch (error) {
       console.error('Erro detalhado ao salvar produto:', error);
-      alert('Erro ao salvar produto!');
+      this.toastService.show('Erro ao salvar produto!', 'error');
     }
   }
 

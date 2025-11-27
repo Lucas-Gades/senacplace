@@ -6,6 +6,8 @@ import { CategoriaService } from '../categoria-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutoService } from '../produto-service';
 
+import { ToastService } from '../toast.component';
+
 @Component({
   selector: 'app-form-categoria',
   standalone: true,
@@ -20,6 +22,7 @@ export class FormCategoria {
   categoriaService = inject(CategoriaService);
   route = inject(ActivatedRoute);
   router = inject(Router);
+  toastService = inject(ToastService);
 
 
   constructor() {
@@ -37,17 +40,17 @@ export class FormCategoria {
     try {
       if (this.id) {
         await this.categoriaService.editar(this.id, this.categoria);
-        alert('Categoria editada com sucesso!');
+        this.toastService.show('Categoria editada com sucesso!', 'success');
         this.router.navigate(['/categorias']);
       } else {
         await this.categoriaService.inserir(this.categoria);
-        alert('Categoria cadastrada com sucesso!');
+        this.toastService.show('Categoria cadastrada com sucesso!', 'success');
         this.categoria = new Categoria();
         this.router.navigate(['/categorias']);
       }
     } catch (error) {
       console.error('Erro ao salvar categoria:', error);
-      alert('Erro ao salvar categoria!');
+      this.toastService.show('Erro ao salvar categoria!', 'error');
     }
   }
                                                                                                         

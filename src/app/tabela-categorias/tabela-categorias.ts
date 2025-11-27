@@ -4,6 +4,7 @@ import { Categoria } from '../categoria';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ToastService } from '../toast.component';
 
 @Component({
   selector: 'app-tabela-categorias',
@@ -14,7 +15,10 @@ import { FormsModule } from '@angular/forms';
 export class TabelaCategorias {
   categorias: Categoria[] = [];
 
-  constructor(private categoriaService: CategoriaService) {
+  constructor(
+    private categoriaService: CategoriaService,
+    private toastService: ToastService
+  ) {
     this.carregarCategorias();
   }
 
@@ -26,10 +30,8 @@ export class TabelaCategorias {
     const categoria = this.categorias.find(c => c.id === id);
     if (categoria && confirm(`Tem certeza que deseja excluir a categoria "${categoria.nomecategoria}"?`)) {
       await this.categoriaService.deletar(id!);
-      alert(`A categoria "${categoria.nomecategoria}" foi deletada com sucesso!`);
+      this.toastService.show(`A categoria "${categoria.nomecategoria}" foi deletada com sucesso!`, 'success');
       await this.carregarCategorias();
-    } else {
-      alert("Ação de exclusão cancelada.");
     }
   }
 }
