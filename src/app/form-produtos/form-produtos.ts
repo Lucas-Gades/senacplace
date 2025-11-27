@@ -2,14 +2,16 @@ import { JsonPipe , CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule ,  } from '@angular/forms';
 import { ProdutoService } from '../produto-service';
+import { CategoriaService } from '../categoria-service';
 import { Produto } from '../produto';
+import { Categoria } from '../categoria';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-produtos',
   imports: [FormsModule, JsonPipe , CommonModule],
-  templateUrl: './form-produto.html',
-  styleUrl: './form-produto.css'
+  templateUrl: './form-produtos.html',
+  styleUrl: './form-produtos.css'
 })
 export class FormProdutos {
   id?: number;
@@ -17,17 +19,24 @@ export class FormProdutos {
   botaoAcao = "Publicar"
 
   produtoService = inject(ProdutoService);
+  categoriaService = inject(CategoriaService);
   route = inject(ActivatedRoute);
   router = inject(Router);
+  listaCategorias: Categoria[] = [];
 
   constructor() {
     this.id = +this.route.snapshot.params['id'];
+    this.carregarCategorias();
     if (this.id) {
       this.botaoAcao = 'Editar';
       this.produtoService.buscarPorId(this.id).then(produto => {
         this.produto = produto || new Produto();
       });
     }
+  }
+
+  async carregarCategorias() {
+    this.listaCategorias = await this.categoriaService.listarCategoria();
   }
 
   erroContato = false;

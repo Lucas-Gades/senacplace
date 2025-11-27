@@ -1,4 +1,4 @@
-import { MoedaBrPipe } from './moeda-br-pipe';
+import { MoedaPipe } from './moeda-pipe';
 
 describe('MoedaBrPipe', () => {
   it('create an instance', () => {

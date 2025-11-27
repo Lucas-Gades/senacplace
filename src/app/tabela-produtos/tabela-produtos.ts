@@ -6,17 +6,16 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ModalDetalheProduto } from '../modal-detalhe-produto/modal-detalhe-produto';
 import { FiltroPesquisaPipe } from '../filtro-pesquisa-pipe';
-import { MoedaBrPipe } from '../moeda-br-pipe';
-
-
+import { MoedaPipe } from '../moeda-pipe';
+import { CategoriaCorPipe } from '../categoria-cor-pipe';
 
 @Component({
-  selector: 'app-tabela-meus-produtos',
-  imports: [ CommonModule, RouterLink, FormsModule, FiltroPesquisaPipe, MoedaBrPipe, ModalDetalheProduto],
-  templateUrl: './tabela-meus-produtos.html',
-  styleUrl: './tabela-meus-produtos.css'
+  selector: 'app-tabela-produtos',
+  imports: [ CommonModule, RouterLink, FormsModule, FiltroPesquisaPipe, MoedaPipe, ModalDetalheProduto, CategoriaCorPipe],
+  templateUrl: './tabela-produtos.html',
+  styleUrl: './tabela-produtos.css'
 })
-export class TabelaMeusProdutos {
+export class TabelaProdutos {
   meusProdutos: Produto[] = [];
   nomePesquisa = "";
   modalRef?: ModalDetalheProduto;

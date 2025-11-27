@@ -25,9 +25,9 @@
           @for(prod of meusProdutos | filtroPesquisa:nomePesquisa; track prod.id) {
           <tr>
             <td>{{prod.titulo}}</td>
-            <td class="d-none d-md-table-cell"> {{prod.preco | moedaBr}} </td>
+            <td class="d-none d-md-table-cell"> {{prod.preco | moeda}} </td>
             <td class="d-none d-md-table-cell">{{prod.categoria}}</td>
-            <td>
+            <td class="text-end">
               <div class="d-flex flex-wrap justify-content-end gap-2">
                 <button class="btn btn-primary btn-sm px-2 py-1 text-truncate" routerLink="/edit/{{prod.id}}">
                   ✏️

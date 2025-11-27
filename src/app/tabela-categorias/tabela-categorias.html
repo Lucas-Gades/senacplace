@@ -6,7 +6,7 @@
     </button>
   </div>
 
-  @if((categorias)) {
+  @if(categorias.length > 0) {
 
     <div class="table-responsive shadow-sm rounded">
       <table class="table table-striped table-hover align-middle mb-0">
@@ -21,7 +21,7 @@
           @for(categoria of categorias; track categoria.id) {
           <tr>
             <td>{{categoria.id}}</td>
-            <td class="d-none d-md-table-cell">{{categoria.nomeCategoria}}</td>
+            <td class="d-none d-md-table-cell">{{categoria.nomecategoria}}</td>
             <td>
               <div class="d-flex flex-wrap justify-content-end gap-2">
                 <button class="btn btn-primary btn-sm px-2 py-1 text-truncate" routerLink="/categorias/edit/{{categoria.id}}">
@@ -40,7 +40,7 @@
 
   } @else {
     <p class="text-center text-muted mt-4">
-      Você ainda não possui produtos cadastrados.
+      Você ainda não possui categorias cadastradas.
     </p>
   }
 </div>

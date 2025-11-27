@@ -15,12 +15,12 @@ export class CategoriaService {
   }
 
   async inserir(categoria: Categoria): Promise<void> {
-    const { error } = await this.supabaseApi.supabase.from('categorias').insert([{ nomeCategoria: categoria.nomeCategoria }]);
+    const { error } = await this.supabaseApi.supabase.from('categorias').insert([{ nomecategoria: categoria.nomecategoria }]);
     if (error) throw error;
   }
 
   async editar(id: number, categoria: Categoria): Promise<void> {
-    const { error } = await this.supabaseApi.supabase.from('categorias').update({ nomeCategoria: categoria.nomeCategoria }).eq('id', id);
+    const { error } = await this.supabaseApi.supabase.from('categorias').update({ nomecategoria: categoria.nomecategoria }).eq('id', id);
     if (error) throw error;
   }
 

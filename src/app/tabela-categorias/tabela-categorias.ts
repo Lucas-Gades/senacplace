@@ -24,9 +24,9 @@ export class TabelaCategorias {
 
   async deletar(id?: number) {
     const categoria = this.categorias.find(c => c.id === id);
-    if (categoria && confirm(`Tem certeza que deseja excluir a categoria "${categoria.nomeCategoria}"?`)) {
+    if (categoria && confirm(`Tem certeza que deseja excluir a categoria "${categoria.nomecategoria}"?`)) {
       await this.categoriaService.deletar(id!);
-      alert(`A categoria "${categoria.nomeCategoria}" foi deletada com sucesso!`);
+      alert(`A categoria "${categoria.nomecategoria}" foi deletada com sucesso!`);
       await this.carregarCategorias();
     } else {
       alert("Ação de exclusão cancelada.");

@@ -46,6 +46,7 @@ export class FormCategoria {
         this.router.navigate(['/categorias']);
       }
     } catch (error) {
+      console.error('Erro ao salvar categoria:', error);
       alert('Erro ao salvar categoria!');
     }
   }

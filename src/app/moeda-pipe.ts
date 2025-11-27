@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'moedaBr'
+  name: 'moeda'
 })
-export class MoedaBrPipe implements PipeTransform {
+export class MoedaPipe implements PipeTransform {
   transform(valor: number | undefined): string {
     if(!valor) return "";
     const valorDecimal = valor.toFixed(2);

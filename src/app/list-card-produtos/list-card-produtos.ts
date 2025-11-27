@@ -7,13 +7,13 @@ import { FormsModule } from '@angular/forms';
 import { FiltroPesquisaPipe } from '../filtro-pesquisa-pipe';
 
 @Component({
-  selector: 'app-list-produtos',
+  selector: 'app-list-card-produtos',
   imports: [FormsModule,CommonModule , FiltroPesquisaPipe , CardProduto], 
 
-  templateUrl: './list-produtos.html',
-  styleUrl: './list-produtos.css'
+  templateUrl: './list-card-produtos.html',
+  styleUrl: './list-card-produtos.css'
 })
-export class ListProdutos {
+export class ListCardProdutos {
  listaProdutos: Produto[] = [];
  nomePesquisa = "";
 

@@ -29,15 +29,9 @@
         <label class="form-label small fw-bold">Categoria</label>
         <select class="form-select form-select-sm" [(ngModel)]="produto.categoria" name="categoria" required #categoria="ngModel">
           <option value="" disabled>Selecione</option>
-          <option value="Eletrônicos">Eletrônicos</option>
-          <option value="Veículos">Veículos</option>
-          <option value="Roupas">Roupas</option>
-          <option value="Móveis">Móveis</option>
-          <option value="Esportes">Esportes</option>
-          <option value="Instrumentos Musicais">Instrumentos Musicais</option>
-          <option value="Imóveis">Imóveis</option>
-          <option value="Serviços">Serviços</option>
-          <option value="Outros">Outros</option>
+          @for (cat of listaCategorias; track cat.id) {
+            <option [value]="cat.nomecategoria">{{ cat.nomecategoria }}</option>
+          }
         </select>
         <div class="text-danger small" *ngIf="formProduto.submitted && categoria.invalid">
           Selecione uma categoria.
