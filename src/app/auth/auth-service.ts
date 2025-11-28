@@ -49,6 +49,6 @@ export class AuthService {
   }
 
   ehAdmin(): boolean {
-    return false; // Implementar lógica de admin se necessário
+    return true; 
   }
 }
