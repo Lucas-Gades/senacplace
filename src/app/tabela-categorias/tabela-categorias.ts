@@ -4,7 +4,7 @@ import { Categoria } from '../categoria';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ToastService } from '../toast.component';
+import { ToastService } from '../toast-service';
 
 @Component({
   selector: 'app-tabela-categorias',

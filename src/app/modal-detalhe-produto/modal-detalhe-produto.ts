@@ -6,7 +6,7 @@ import { TelefonePipe } from '../telefone-pipe';
 import { inject } from '@angular/core';
 
 
-import { ToastService } from '../toast.component';
+import { ToastService } from '../toast-service';
 
 @Component({
   selector: 'app-modal-detalhe-produto',

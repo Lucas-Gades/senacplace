@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth/auth-service';
 import { Router } from '@angular/router';
 
-import { ToastService } from '../toast.component';
+import { ToastService } from '../toast-service';
 
 @Component({
   selector: 'app-login',

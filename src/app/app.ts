@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './auth/auth-service'; 
-import { ToastComponent } from './toast.component'; 
+import { ToastComponent } from './toast/toast'; 
 
 @Component({
   selector: 'app-root',

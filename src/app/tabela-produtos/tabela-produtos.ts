@@ -9,7 +9,7 @@ import { FiltroPesquisaPipe } from '../filtro-pesquisa-pipe';
 import { MoedaPipe } from '../moeda-pipe';
 
 
-import { ToastService } from '../toast.component';
+import { ToastService } from '../toast-service';
 
 @Component({
   selector: 'app-tabela-produtos',

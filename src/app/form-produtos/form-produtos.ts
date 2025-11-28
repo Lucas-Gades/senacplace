@@ -7,7 +7,7 @@ import { Produto } from '../produto';
 import { Categoria } from '../categoria';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ToastService } from '../toast.component';
+import { ToastService } from '../toast-service';
 
 @Component({
   selector: 'app-form-produtos',

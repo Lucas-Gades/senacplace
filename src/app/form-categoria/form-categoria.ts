@@ -6,7 +6,7 @@ import { CategoriaService } from '../categoria-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutoService } from '../produto-service';
 
-import { ToastService } from '../toast.component';
+import { ToastService } from '../toast-service';
 
 @Component({
   selector: 'app-form-categoria',
