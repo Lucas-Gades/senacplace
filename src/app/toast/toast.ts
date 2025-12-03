@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ToastService } from '../toast-service'; // IMPORT atualizado
+import { ToastService } from '../toast-service'; 
 
 @Component({
   selector: 'app-toast',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './toast.html',
-  styleUrl: './toast.css'   // ← CORRIGIDO
+  styleUrl: './toast.css'   
 })
 export class ToastComponent {
   constructor(public toastService: ToastService) {}
