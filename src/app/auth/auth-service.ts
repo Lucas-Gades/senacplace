@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SupabaseApi } from '../supabase-api';
+import { Supabase } from '../service/supabase';
 import { User, Session } from '@supabase/supabase-js';
 
 @Injectable({
@@ -8,17 +8,17 @@ import { User, Session } from '@supabase/supabase-js';
 export class AuthService {
   private _session: Session | null = null;
   
-  constructor(private supabaseApi: SupabaseApi) {
-    this.supabaseApi.supabase.auth.onAuthStateChange((event, session) => {
+  constructor(private supabase: Supabase) {
+    this.supabase.supabase.auth.onAuthStateChange((event, session) => {
       this._session = session;
     });
-    this.supabaseApi.supabase.auth.getSession().then(({ data }) => {
+    this.supabase.supabase.auth.getSession().then(({ data }) => {
       this._session = data.session;
     });
   }
 
   async login(email: string, senha: string): Promise<boolean> {
-    const { data, error } = await this.supabaseApi.supabase.auth.signInWithPassword({
+    const { data, error } = await this.supabase.supabase.auth.signInWithPassword({
       email: email,
       password: senha,
     });
@@ -31,16 +31,16 @@ export class AuthService {
   }
 
   async logout(): Promise<void> {
-    await this.supabaseApi.supabase.auth.signOut();
+    await this.supabase.supabase.auth.signOut();
   }
 
   async getSession(): Promise<Session | null> {
-    const { data } = await this.supabaseApi.supabase.auth.getSession();
+    const { data } = await this.supabase.supabase.auth.getSession();
     return data.session;
   }
 
   async getUser(): Promise<User | null> {
-    const { data } = await this.supabaseApi.supabase.auth.getUser();
+    const { data } = await this.supabase.supabase.auth.getUser();
     return data.user;
   }
 
